@@ -21,7 +21,7 @@ function CountryCard({ name, image, abbr }) {
       <img
         style={{ width: "100px", height: "100px", margin: "0 auto" }}
         src={image}
-        alt="Country Flag"
+        alt={name}
       />
       <h3>{name}</h3>
       <p>{abbr}</p>
@@ -41,7 +41,7 @@ function Flags() {
       console.log(data);
       setFlagData(data);
     } catch (error) {
-      console.error(error.response);
+      console.error("Error fetching data:", error.response);
     }
   };
 
@@ -50,15 +50,16 @@ function Flags() {
   });
 
   return (
-    <div>
-      style=
+    <div
+    style=
       {{
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         flexWrap: "wrap",
         gap: "20px",
-      }}
+      }}>
+      
       {flagData.map((flag, index) => (
         <CountryCard
           key={index}
