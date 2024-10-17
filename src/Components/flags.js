@@ -38,7 +38,7 @@ function Flags() {
   }
 
   const filteredCountries = flagData.filter((flag) =>
-    flag.name.common.includes(search)
+    flag.name.common.toLowerCase().includes(search.toLowerCase())
   )
 
   const fetch = async () => {
