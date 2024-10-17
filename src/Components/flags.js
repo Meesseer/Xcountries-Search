@@ -31,11 +31,20 @@ function CountryCard({ name, image, abbr }) {
 
 function Flags() {
   const [flagData, setFlagData] = useState([]);
+  const [search, setSearch] = useState("")
+
+  const searchCountry = (e) => {
+    setSearch(e.target.value)
+  }
+
+  const filteredCountries = flagData.filter((flag) =>
+    flag.name.common.includes(search)
+  )
 
   const fetch = async () => {
     try {
       const response = await axios.get(
-        `https://xcountries-backend.azurewebsites.net/all`
+        ` https://restcountries.com/v3.1/all`
       );
       const data = response.data;
       console.log(data);
@@ -47,9 +56,11 @@ function Flags() {
 
   useEffect(() => {
     fetch();
-  });
+  },[]);
 
   return (
+  <div>
+    <input type="text" style={{margin: "14px", width:"50%"}}placeholder="Search Your Country Here!" onChange={searchCountry}></input>
     <div
     style=
       {{
@@ -59,16 +70,16 @@ function Flags() {
         flexWrap: "wrap",
         gap: "20px",
       }}>
-      
-      {flagData.map((flag, index) => (
+      {filteredCountries.map((flag, index) => (
         <CountryCard
           key={index}
-          name={flag.name}
-          image={flag.flag}
+          name={flag.name.common}
+          image={flag.flags.png}
           abbr={flag.abbr}
         />
       ))}
     </div>
+  </div>
   );
 }
 
