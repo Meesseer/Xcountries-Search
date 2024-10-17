@@ -6,6 +6,7 @@ import { useEffect } from "react";
 function CountryCard({ name, image, abbr }) {
   return (
     <div
+      className="countryCard"
       style={{
         display: "flex",
         justifyContent: "center",
